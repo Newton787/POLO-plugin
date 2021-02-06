@@ -325,7 +325,7 @@ class POLO:
             # LINK FIRMS NASA https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_South_America_7d.csv
 
         processing.run("native:filedownloader", {
-            'URL': 'https://drive.google.com/u/0/uc?id=1tmNyvujgm-PRlZb_Cb14P6iiQ812wuHp&export=download',
+            'URL': 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_South_America_7d.csv',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/DADOS.csv')})
 
