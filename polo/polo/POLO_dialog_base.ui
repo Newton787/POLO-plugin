@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>POLODialogBase</class>
  <widget class="QDialog" name="POLODialogBase">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -24,6 +27,10 @@
   </property>
   <property name="windowTitle">
    <string>POLO</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/plugins/POLO/icon.png</normaloff>:/plugins/POLO/icon.png</iconset>
   </property>
   <property name="windowOpacity">
    <double>50.000000000000000</double>
@@ -217,9 +224,9 @@
  <connections>
   <connection>
    <sender>button_box</sender>
-   <signal>accepted()</signal>
+   <signal>rejected()</signal>
    <receiver>POLODialogBase</receiver>
-   <slot>accept()</slot>
+   <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -233,9 +240,9 @@
   </connection>
   <connection>
    <sender>button_box</sender>
-   <signal>rejected()</signal>
+   <signal>accepted()</signal>
    <receiver>POLODialogBase</receiver>
-   <slot>reject()</slot>
+   <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>

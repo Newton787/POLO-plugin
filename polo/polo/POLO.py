@@ -25,7 +25,7 @@ from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction
 from qgis.core import QgsApplication
-from qgis.core import QgsProject
+from qgis.core import QgsProject, Qgis
 from qgis.core import QgsLayoutExporter
 from qgis.core import QgsProcessing
 from qgis.core import QgsProcessingAlgorithm
@@ -222,12 +222,31 @@ class POLO:
             copyfile(os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/recursos/POLO.qgz'),
                      os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/POLO.qgz'))
 
-            # Hidrografia_Linhas
-            # Donwload_KML
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Acessando informações de hidrografia",
+                level=Qgis.Info, duration=45)
+
+            # Hidrografia
+
+            # Donwload_KML_linhas
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1qCULQd8MKynZChMlCZYiY1iXzJkhDbQD&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.kml')})
+
+            # Donwload_KML_poly
+            processing.runAndLoadResults("native:filedownloader", {
+                'URL': 'https://drive.google.com/u/0/uc?id=1RXbqteoxbYZ6L9F17R7aI8svpVYEQ4fe&export=download',
+                'OUTPUT': os.path.expanduser(
+                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.kml')})
+
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Adicionando informações de hidrografia",
+                level=Qgis.Info, duration=15)
+
+            # Hidrografia_linhas
             # Verificação de geometria
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
@@ -248,11 +267,7 @@ class POLO:
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.qml')})
 
             # Hidrografia_Poly
-            # Donwload_KML
-            processing.runAndLoadResults("native:filedownloader", {
-                'URL': 'https://drive.google.com/u/0/uc?id=1RXbqteoxbYZ6L9F17R7aI8svpVYEQ4fe&export=download',
-                'OUTPUT': os.path.expanduser(
-                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.kml')})
+
             # Verificação de geometria
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
@@ -272,7 +287,14 @@ class POLO:
                                'STYLE': os.path.expanduser(
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
 
+
             # Vias de acesso
+
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Acessando informações de vias, ramais e vicinais",
+                level=Qgis.Info, duration=30)
+
             # Donwload_KML
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1qmWXKmJUbAdzcKmNqddnJgkH6pFDAmpR&export=download',
@@ -285,6 +307,11 @@ class POLO:
                                              'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Vias de acesso.gpkg')})
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Adicionando informações de vias, estradas e ramais",
+                level=Qgis.Info, duration=15)
+
             # Downlaod_Estilo
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1FBcVyOeszLd_8wk8EE0c5XzgqWxZVtEt&export=download',
@@ -310,6 +337,12 @@ class POLO:
                                              'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Limites municipais.gpkg')})
+
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Adicionando informações dos municípios e regiões",
+                level=Qgis.Info, duration=15)
+
             # Downlaod_Estilo
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1kgF5AKGrof150-YmMeVTGgwhMGhgEDY1&export=download',
@@ -323,6 +356,11 @@ class POLO:
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Municipios_.qml')})
 
             # Focos de calor
+
+            # mostrar mensagem
+            self.iface.messageBar().pushMessage(
+                "POLO", "Acessando informações de focos de calor",
+                level=Qgis.Info, duration=15)
 
             # Donwload_CSV
             # LINK TESTE>> https://drive.google.com/u/0/uc?id=1tmNyvujgm-PRlZb_Cb14P6iiQ812wuHp&export=download
@@ -353,6 +391,13 @@ class POLO:
             'TARGET_CRS': QgsCoordinateReferenceSystem('EPSG:4326'),
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dados.gpkg')})
+
+        # mostrar mensagem
+        self.iface.messageBar().pushMessage(
+            "POLO", "Gerando análieses",
+            level=Qgis.Info, duration=15)
+
+
         # Intersect focos
         processing.run("native:intersection",
                        {'INPUT': os.path.expanduser(
@@ -475,6 +520,12 @@ class POLO:
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KernelLinhas.gpkg'),
                            'EXPRESSION': '\"SCORE\">(maximum(\"SCORE\")*0.6)', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/SCOREAlto.gpkg')})
+
+        # mostrar mensagem
+        self.iface.messageBar().pushMessage(
+            "POLO", "Procurando por áreas prioritárias",
+            level=Qgis.Info, duration=15)
+
         # Score Selecionado
         processing.run("native:extractbyexpression",
                        {'INPUT': os.path.expanduser(
@@ -607,4 +658,7 @@ class POLO:
                         'TEXT_FORMAT': 0, 'SEPARATE_LAYERS': False,
                         'OUTPUT':os.path.expanduser('~/Desktop/Relatorio focos de calor_'+DATANAME+'.pdf')})
 
-
+        #mostrar mensagem
+        self.iface.messageBar().pushMessage(
+        "POLO", "Sucesso, o processamento terminou!",
+        level=Qgis.Success, duration=30)
