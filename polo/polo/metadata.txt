@@ -5,15 +5,15 @@
 [general]
 name=POLO
 qgisMinimumVersion=3.0
-description=Elabora automaticamente relátorios e mapas de focos de calor a partir do bando de dados FIRMS/NASA
+description=Elabora automaticamente relátorios e mapas de focos de calor a partir do banco de dados FIRMS/NASA
 version=0.1
 author=Newton Coelho Monteiro
 email=newtongel@gmail.com
 
 about=POLO, mensageiro do deus Tupã, foi a inspiração para o nome deste plugin, que tem por objetivo facilitar o acesso às informações de queimadas no estado do Amazonas. Sem demandar conhecimentos em geoprocessamento, qualquer usuário será capaz de gerar, automaticamente, relatórios e mapas dos focos de calor que ocorrem no estado do Amazonas em tempo real, identificando áreas prioritárias e quantificando o número de focos de calor por município como também por mesorregião que ocorreram nos últimos 7 dias, a partir da data da busca. O plugin acessa a base de dados do FIRE INFORMATION FOR RESOURCE MANAGEMENT SYSTEM – FIRMS, da Agência Nacional Aeroespacial Americana – NASA e busca as informações do sensor MODIS (Espectrorradiômetro de Imagem de Resolução Moderada), a bordo dos satélites de referência TERRA e AQUA. Este plugin é fruto do trabalho do mestrando Newton Coelho Monteiro na disciplina Desenvolvimento de Aplicações Geoespaciais, do Programa de Pós Graduação em Ciências Geodésicas da Universidade Federal do Paraná, UFPR, sobre a orientação da Professora Dra Silvana Camboim.
 
-tracker=http://bugs
-repository=http://repo
+tracker=https://github.com/Newton787/POLO-plugin/issues
+repository=https://github.com/Newton787/POLO-plugin/tree/main/polo
 # End of mandatory metadata
 
 # Recommended items:

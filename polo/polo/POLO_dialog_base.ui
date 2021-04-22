@@ -148,7 +148,7 @@
      <x>20</x>
      <y>60</y>
      <width>601</width>
-     <height>141</height>
+     <height>321</height>
     </rect>
    </property>
    <property name="font">
@@ -172,7 +172,7 @@
     <number>6</number>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Olá antes de iniciar uso do plugin seguem algumas instruções rápidas. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;1 - Salve todos os projetos que já estão abertos. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;2 - Ao iniciar, o computador realizará parte do processamento, o que pode levar mais ou menos tempo dependendo do hardware que está sendo usado. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;3 – Durante processamento várias informações serão carregadas e configuradas na tela, aguarde até o surgimento do sinal verde na parte superior do monitor, sinalizando o fim do processamento.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;4 – Um arquivo PDF será salvo automaticamente no desktop (Área de trabalho), caso apareça mensagem de erro, essa etapa terá de ser feita manualmente. Para isso basta clicar em PROJETO, no canto superior esquerdo, desça até LAYOUT e clique em RELATÓRIO FOCOS DE CALOR. Ao abrir a janela no canto superior esquerdo clique em LAYOUT e desça até “EXPORTAR COMO PDF”, defina o diretório e depois clique em SALVAR e SAVE na janela seguinte.  &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Ao final será gerado um PDF contendo todas as informações relacionadas aos focos de calor nos últimos 7 dias. Será gerado também um mapa de navegação para cada área crítica. Tanto o relatório quanto os mapas são arquivos PDF com camada de GEOINFORMAÇÃO, sendo recomendado o uso destes arquivos para navegação por meio de aplicativos no smartphone ou tablet.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Olá antes de iniciar uso do plugin seguem algumas instruções rápidas. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;1 - Salve todos os projetos que já estão abertos. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;2 - Ao iniciar, o computador realizará parte do processamento, o que pode levar mais ou menos tempo dependendo do hardware que está sendo usado. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;3 – Durante processamento várias informações serão carregadas e configuradas na tela, aguarde até o surgimento do sinal verde na parte superior do monitor, sinalizando o fim do processamento.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;4 – Informe a seguir o local onde será salvo o relatórios e os mpas da áreas prioritároias.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;5 – Um arquivo PDF será salvo automaticamente, contendo todas as informações relacionadas aos focos de calor nos últimos 7 dias. Será gerado também um mapa de navegação para cada área crítica encontrada. Tanto o relatório quanto os mapas são arquivos PDF com camada de GEOINFORMAÇÃO, sendo recomendado o uso destes arquivos para navegação por meio de aplicativos no smartphone ou tablet.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::AutoText</enum>
@@ -190,20 +190,35 @@
     <number>1</number>
    </property>
   </widget>
-  <widget class="QgsFileWidget" name="relatlocal">
+  <widget class="QgsFileWidget" name="localsave">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>29</x>
      <y>250</y>
-     <width>431</width>
-     <height>20</height>
+     <width>561</width>
+     <height>23</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="fileWidgetButtonVisible">
+    <bool>true</bool>
+   </property>
+   <property name="fullUrl">
+    <bool>false</bool>
    </property>
    <property name="storageMode">
     <enum>QgsFileWidget::GetDirectory</enum>
-   </property>
-   <property name="relativeStorage">
-    <enum>QgsFileWidget::Absolute</enum>
    </property>
   </widget>
   <zorder>label_4</zorder>
@@ -211,7 +226,7 @@
   <zorder>label_3</zorder>
   <zorder>label</zorder>
   <zorder>label_5</zorder>
-  <zorder>relatlocal</zorder>
+  <zorder>localsave</zorder>
  </widget>
  <customwidgets>
   <customwidget>

@@ -39,6 +39,7 @@ import processing
 
 
 
+
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
@@ -205,6 +206,7 @@ class POLO:
 
         # show the dialog
         self.dlg.show()
+
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
@@ -212,7 +214,10 @@ class POLO:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             # pass
-            #RESETE_PROCESS
+            #Caminho a ser exportado
+
+
+            #RESETE FOLDER PROCESS
             import shutil
             shutil.rmtree(
                 os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/'))
@@ -222,65 +227,68 @@ class POLO:
             copyfile(os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/recursos/POLO.qgz'),
                      os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/POLO.qgz'))
 
-            # mostrar mensagem
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Acessando informações de hidrografia",
                 level=Qgis.Info, duration=45)
 
-            # Hidrografia
+            # Hidrografia HIDROGRAPH
 
-            # Donwload_KML_linhas
+            # Donwload_KML_linhas DOWNLOAD KML_LINES
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1qCULQd8MKynZChMlCZYiY1iXzJkhDbQD&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.kml')})
 
-            # Donwload_KML_poly
+            # Donwload_KML_poly DOWNLOAD KML_POLY
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1RXbqteoxbYZ6L9F17R7aI8svpVYEQ4fe&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.kml')})
 
-            # mostrar mensagem
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Adicionando informações de hidrografia",
                 level=Qgis.Info, duration=15)
 
-            # Hidrografia_linhas
-            # Verificação de geometria
+            # Hidrografia_linhas HIDROGRAPH LINES
+            # Verificação de geometria GEOMETRY CHECK
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.kml'),
                                              'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia.gpkg')})
-            # Downlaod_Estilo
+            # Downlaod_Estilo DOWNLOAD STYLE
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1BNunj56yiljlb8petZ3Rv1SINMl9-XuR&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.qml')})
-            # Aplicar_Estilo
+
+            # Aplicar_Estilo APPLY STYLE
             processing.run("native:setlayerstyle",
                            {'INPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia.gpkg'),
                                'STYLE': os.path.expanduser(
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.qml')})
 
-            # Hidrografia_Poly
+            # Hidrografia_Poly HIDROGRAPH POLIGON
 
-            # Verificação de geometria
+            # Verificação de geometria GEOMETRY CHECK
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.kml'),
                                              'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly.gpkg')})
-            # Downlaod_Estilo
+
+            # Downlaod_Estilo DOWNLOAD STYLE
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1_-Tde-pw-RYZkrO9xMf7sXuhlgDA2iAK&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
-            # Aplicar_Estilo
+
+            # Aplicar_Estilo APPLY STYLE
             processing.run("native:setlayerstyle",
                            {'INPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly.gpkg'),
@@ -288,49 +296,54 @@ class POLO:
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
 
 
-            # Vias de acesso
+            # Vias de acesso ACCESS WAYS
 
-            # mostrar mensagem
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Acessando informações de vias, ramais e vicinais",
                 level=Qgis.Info, duration=30)
 
-            # Donwload_KML
+            # Donwload KML das rodovias DOWNLOAD ACCESS WAYS KML
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1qmWXKmJUbAdzcKmNqddnJgkH6pFDAmpR&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Rodovias_.kml')})
-            # Verificação de geometria
+
+            # Verificação de geometria GEOMETRY CHECK
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Rodovias_.kml'),
                                              'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Vias de acesso.gpkg')})
-            # mostrar mensagem
+
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Adicionando informações de vias, estradas e ramais",
                 level=Qgis.Info, duration=15)
 
-            # Downlaod_Estilo
+            # Downlaod_Estilo DOWNLOAD STYLE
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1FBcVyOeszLd_8wk8EE0c5XzgqWxZVtEt&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Rodovias_.qml')})
-            # Aplicar_Estilo
+
+            # Aplicar_Estilo APPLY STYLE
             processing.run("native:setlayerstyle",
                            {'INPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Vias de acesso.gpkg'),
                                'STYLE': os.path.expanduser(
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Rodovias_.qml')})
 
-            # Municipio
-            # Donwload_KML
+            # Municipio COUNTY
+
+            # Donwload KML dos municipios DOWNLOAD COUNTY KML
             processing.runAndLoadResults("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1xVQBR5IuD9lTiSApTdXtwTuCdpGTeLLS&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Municipios_.kml')})
-            # Verificação de geometria
+
+            # Verificação de geometria GEOMETRY CHECK
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Municipios_.kml'),
@@ -338,26 +351,27 @@ class POLO:
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Limites municipais.gpkg')})
 
-            # mostrar mensagem
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Adicionando informações dos municípios e regiões",
                 level=Qgis.Info, duration=15)
 
-            # Downlaod_Estilo
+            # Downlaod_Estilo DOWNLOAD STYLE
             processing.run("native:filedownloader", {
                 'URL': 'https://drive.google.com/u/0/uc?id=1kgF5AKGrof150-YmMeVTGgwhMGhgEDY1&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Municipios_.qml')})
-            # Aplicar_Estilo
+
+            # Aplicar_Estilo APPLY STILE
             processing.run("native:setlayerstyle",
                            {'INPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Limites municipais.gpkg'),
                                'STYLE': os.path.expanduser(
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Municipios_.qml')})
 
-            # Focos de calor
+            # Focos de calor HEAT POINTS
 
-            # mostrar mensagem
+            # mostrar mensagem SHOW MENSSEGER
             self.iface.messageBar().pushMessage(
                 "POLO", "Acessando informações de focos de calor",
                 level=Qgis.Info, duration=15)
@@ -371,19 +385,19 @@ class POLO:
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/DADOS.csv')})
 
-        # Donwload_qml Focos de calor
+        # Donwload_qml Focos de calor DOWNLOAD STYLE HEAT POINTS
         processing.run("native:filedownloader", {
             'URL': 'https://drive.google.com/u/0/uc?id=1K5nAihJBfjV7HcQ87soqqDNFg2SfBAtW&export=download',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/focosdecalor.qml')})
 
-        # Donwload_qml Kernel
+        # Donwload_qml Kernel DOWNLOAD STYLE FOR KERNEL HEAT POINTS
         processing.run("native:filedownloader", {
             'URL': 'https://drive.google.com/u/0/uc?id=191MdbDgGvLbvlHfjlfE4TBoj9rXMuRv8&export=download',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Kernel.qml')})
 
-        # CSV para gpkg
+        # CSV para gpkg CSV TO GPKG
         processing.run("native:createpointslayerfromtable", {
             'INPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/DADOS.csv'),
@@ -392,13 +406,13 @@ class POLO:
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dados.gpkg')})
 
-        # mostrar mensagem
+        # mostrar mensagem SHOW MENSSEGER
         self.iface.messageBar().pushMessage(
             "POLO", "Gerando análieses",
             level=Qgis.Info, duration=15)
 
 
-        # Intersect focos
+        # Intersect focos INTERSECT HEAT POINTS
         processing.run("native:intersection",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dados.gpkg'),
@@ -407,7 +421,8 @@ class POLO:
                            'INPUT_FIELDS': [], 'OVERLAY_FIELDS': [], 'OVERLAY_FIELDS_PREFIX': '',
                            'OUTPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos_AM.gpkg')})
-        # editar colunas para kernel
+
+        # editar colunas para kernel ADJUST FIELD FOR KERNEL
         processing.runAndLoadResults("native:refactorfields",
                                      {'INPUT': os.path.expanduser(
                                          '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos_AM.gpkg'),
@@ -436,13 +451,14 @@ class POLO:
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Intensidade focos de calor.gpkg')})
 
-        # Aplicar_Estilo para Kernel
+        # Aplicar_Estilo para Kernel APPLY STYLE FOR KERNEL
         processing.run("native:setlayerstyle",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Intensidade focos de calor.gpkg'),
                            'STYLE': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Kernel.qml')})
-        # Editar colunas para focos de calor
+
+        # Editar colunas para focos de calor ADJUST FIELD FOR HEAT POINTS
         processing.runAndLoadResults("native:refactorfields",
                                      {'INPUT': os.path.expanduser(
                                          '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos_AM.gpkg'),
@@ -471,14 +487,15 @@ class POLO:
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor.gpkg')})
 
-        # Focos de Calor por cidade
+        # Focos de Calor por cidade HEAT POINTS FOR CITYS
         processing.runAndLoadResults("qgis:statisticsbycategories",
                                      {'INPUT': os.path.expanduser(
                                          '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor.gpkg'),
                                          'VALUES_FIELD_NAME': '', 'CATEGORIES_FIELD_NAME': ['NOME'],
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos por Cidade.gpkg')})
-        # Focos de Calor por Mesoregião
+
+        # Focos de Calor por Mesoregião HEAT POINTS FOR MESOREGIONS
         processing.runAndLoadResults("qgis:statisticsbycategories",
                                      {'INPUT': os.path.expanduser(
                                          '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor.gpkg'),
@@ -486,27 +503,29 @@ class POLO:
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos por Mesoregião.gpkg')})
 
-        # Aplicar_Estilo para focos de calor
+        # Aplicar_Estilo para focos de calor APPLY STYLE FOR HEAT POINTS
         processing.run("native:setlayerstyle",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor.gpkg'),
                            'STYLE': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/focosdecalor.qml')})
 
-        # Kernel CORE
-        # Donwload_qml Kernel
+        # Kernel KERNEL
+        # Donwload_qml Kernel raster DOWNLOAD STYLE FOR KERNEL RASTER
         processing.run("native:filedownloader", {
             'URL': 'https://drive.google.com/u/0/uc?id=1IRoE-TNyS70WIOjzk3RPajGQBpOJtURx&export=download',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Areasprioritarias.qml')})
-        # Analise de kernel
+
+        # Analise de kernel KERNEL ANALYSIS
         processing.run("qgis:heatmapkerneldensityestimation",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Intensidade focos de calor.gpkg'),
                            'RADIUS': 0.2, 'RADIUS_FIELD': '', 'PIXEL_SIZE': 0.00778, 'WEIGHT_FIELD': '', 'KERNEL': 0,
                            'DECAY': 0, 'OUTPUT_VALUE': 0, 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KERNEL.tif')})
-        # Linhas do Kernel
+
+        # Linhas do Kernel KERNEL LINES
         processing.run("gdal:contour",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KERNEL.tif'),
@@ -514,38 +533,42 @@ class POLO:
                            'INTERVAL': 0.5, 'FIELD_NAME': 'SCORE', 'CREATE_3D': False, 'IGNORE_NODATA': False,
                            'NODATA': None, 'OFFSET': 0, 'EXTRA': '', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KernelLinhas.gpkg')})
-        # Score Alto
+
+       # Score Alto HIGHT SCORE
         processing.run("native:extractbyexpression",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KernelLinhas.gpkg'),
                            'EXPRESSION': '\"SCORE\">(maximum(\"SCORE\")*0.6)', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/SCOREAlto.gpkg')})
 
-        # mostrar mensagem
+        # mostrar mensagem SHOW MENSSEGER
         self.iface.messageBar().pushMessage(
             "POLO", "Procurando por áreas prioritárias",
             level=Qgis.Info, duration=15)
 
-        # Score Selecionado
+        # Score Selecionado SELECTED SCORE
         processing.run("native:extractbyexpression",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/SCOREAlto.gpkg'),
                            'EXPRESSION': '\"SCORE\"=minimum(\"SCORE\")\r\n', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/SCORESelec.gpkg')})
-        # Linha para Poligono
+
+        # Linha para Poligono LINES TO POLYGONS
         processing.run("qgis:linestopolygons",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/SCORESelec.gpkg'),
                            'OUTPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/CORE.gpkg')})
-        # Centroides dos Poligonos
+
+        # Centroides dos Poligonos CENTROID OF POLYGONS
         processing.run("native:centroids",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/CORE.gpkg'),
                            'ALL_PARTS': False,
                            'OUTPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/CORECentroides.gpkg')})
-        # Intercessão Municipios_Centroides dos Poligonos
+
+        # Intercessão Municipios_Centroides dos Poligonos INTERSECT COUNTIES WITH CENTROID
         processing.run("native:intersection", {
             'INPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/CORECentroides.gpkg'),
@@ -554,7 +577,8 @@ class POLO:
             'INPUT_FIELDS': [],
             'OVERLAY_FIELDS': [], 'OVERLAY_FIELDS_PREFIX': '', 'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/centroidsintersect.gpkg')})
-        # Editar Campo Centroides
+
+        # Editar Campo Centroides ADJUST CENTROID FIELD
         processing.run("native:refactorfields", {
             'INPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/centroidsintersect.gpkg'),
@@ -566,7 +590,8 @@ class POLO:
                                {'expression': 'to_dms($x,\'x\',2)', 'length': 20, 'name': 'Long', 'precision': 0,
                                 'type': 10}], 'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/centroideEDITADO.gpkg')})
-        # Associar atributo por local
+
+        # Associar atributo por local ACESS ATRIBUTES FOR LOCAL
         processing.run("native:joinattributesbylocation",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/CORE.gpkg'),
@@ -575,7 +600,8 @@ class POLO:
                            'PREDICATE': [0], 'JOIN_FIELDS': [], 'METHOD': 0, 'DISCARD_NONMATCHING': False, 'PREFIX': '',
                            'OUTPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COREpronto.gpkg')})
-        # Contagem Core_focos
+
+        # Contagem Core_focos SCORE HEAT POINTS
         processing.run("native:countpointsinpolygon",
                        {'POLYGONS': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COREpronto.gpkg'),
@@ -584,13 +610,14 @@ class POLO:
                            'WEIGHT': '',
                            'CLASSFIELD': '', 'FIELD': 'NFocos', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Contagem.gpkg')})
-        # Core>25
+        # Score>25 SCORE>25
         processing.run("native:extractbyexpression", {
             'INPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Contagem.gpkg'),
             'EXPRESSION': ' \"NFocos\">25', 'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COREValido.gpkg')})
-        # Areas Prioritarias
+
+        # Areas Prioritarias PRIORITY AREAS
         processing.runAndLoadResults("native:refactorfields",
                                      {'INPUT': os.path.expanduser(
                                          '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COREValido.gpkg'),
@@ -614,7 +641,8 @@ class POLO:
                                               'type': 6}],
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Áreas Prioritárias.gpkg')})
-        # Aplicar_Estilo para Áreas Prioritárias
+
+        # Aplicar_Estilo para Áreas Prioritárias APPLY STYLE ON PRIORITY AREAS
         processing.run("native:setlayerstyle",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Áreas Prioritárias.gpkg'),
@@ -622,12 +650,13 @@ class POLO:
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Areasprioritarias.qml')})
 
         # DASHBOARD
-        # Donwload_qml Dashboard
+        # Donwload_qml Dashboard DONWLOAD STYLE DASHBOARD
         processing.run("native:filedownloader", {
             'URL': 'https://drive.google.com/u/0/uc?id=1PTiQKFOrlRPY4Yd6Vt_0KkyjoXJ5kk8O&export=download',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dashboard_.qml')})
-        # Donwload Dashboard
+
+        # Donwload Dashboard DONWLOAD DASHBOARD
         processing.runAndLoadResults("native:filedownloader", {
             'URL': 'https://drive.google.com/u/0/uc?id=1NMSVdU1kqxGkVT2u1aYmuHiUM-jKO2wx&export=download',
             'OUTPUT': os.path.expanduser(
@@ -638,27 +667,47 @@ class POLO:
                                          'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
                                          'VALID_OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dashboard.gpkg')})
-        # Aplicar_Estilo para Dashboard
+
+        # Aplicar_Estilo para Dashboard APPLY STYLE FOR DASHBOARD
         processing.run("native:setlayerstyle",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dashboard.gpkg'),
                            'STYLE': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Dashboard_.qml')})
-        #ABRIR MAPA RELATORIO
+
+
+        #Historico INPE HISTORIC INPE
+
+        # mostrar mensagem SHOW MENSSAGER
+        self.iface.messageBar().pushMessage(
+            "POLO", "Acessando dados de históricos do INPE",
+            level=Qgis.Info, duration=15)
+
+        # Donwload historico amazonas DONWLOAD AMAZON HISTORIC
+        processing.runAndLoadResults("native:filedownloader", {
+            'URL': 'https://queimadas.dgi.inpe.br/queimadas/portal-static//estado/csv_estatisticas/historico_estado_amazonas.csv',
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Historico Amazonas.csv')})
+
+
+        #Abrir projeto do relatorio OPEN REPORT PROJECT
         project = QgsProject.instance()
         project.read(os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/POLO.QGZ'))
         print(project.fileName())
 
-        #Exportar relatório
+        #Exportar relatório EXPORT REPORT
+        folder_path = self.dlg.localsave.filePath()
+
 
         DATANAME = datetime.now().strftime("%d_%m_%y")
+        LOCAL = os.path.join(folder_path,'Relatorio_'+DATANAME+'.pdf')
         processing.run("native:printlayouttopdf",
                        {'LAYOUT': 'Relatório Focos de Calor', 'LAYERS': None, 'DPI': None, 'FORCE_VECTOR': False,
                         'GEOREFERENCE': True, 'INCLUDE_METADATA': True, 'DISABLE_TILED': False, 'SIMPLIFY': True,
                         'TEXT_FORMAT': 0, 'SEPARATE_LAYERS': False,
-                        'OUTPUT':os.path.expanduser('~/Desktop/Relatorio focos de calor_'+DATANAME+'.pdf')})
+                        'OUTPUT':LOCAL})
 
-        #mostrar mensagem
+        #SHOW FINISH MENSSEGER
         self.iface.messageBar().pushMessage(
-        "POLO", "Sucesso, o processamento terminou!",
+        "POLO", "Sucesso o processamento terminou " + LOCAL,
         level=Qgis.Success, duration=30)
