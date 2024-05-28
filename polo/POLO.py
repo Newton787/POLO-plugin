@@ -38,8 +38,6 @@ import os
 import processing
 
 
-
-
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
@@ -96,7 +94,6 @@ class POLO:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('POLO', message)
-
 
     def add_action(
         self,
@@ -185,7 +182,6 @@ class POLO:
         # will be set False in run()
         self.first_start = True
 
-
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
@@ -216,7 +212,6 @@ class POLO:
             # pass
             #Caminho a ser exportado
 
-
             #RESETE FOLDER PROCESS
             import shutil
             shutil.rmtree(
@@ -232,11 +227,12 @@ class POLO:
                 "POLO", "Acessando informações de hidrografia",
                 level=Qgis.Info, duration=45)
 
+
             # Hidrografia HIDROGRAPH
 
             # Donwload_KML_linhas DOWNLOAD KML_LINES
             processing.runAndLoadResults("native:filedownloader", {
-                'URL': 'https://drive.google.com/u/0/uc?id=1qCULQd8MKynZChMlCZYiY1iXzJkhDbQD&export=download',
+                'URL': 'https://drive.google.com/uc?id=1qCULQd8MKynZChMlCZYiY1iXzJkhDbQD&export=download',
                 'OUTPUT': os.path.expanduser(
                     '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Hidrografia_.kml')})
 
@@ -274,6 +270,12 @@ class POLO:
 
             # Hidrografia_Poly HIDROGRAPH POLIGON
 
+            # Downlaod_Estilo DOWNLOAD STYLE
+            processing.run("native:filedownloader", {
+                'URL': 'https://drive.google.com/u/0/uc?id=1_-Tde-pw-RYZkrO9xMf7sXuhlgDA2iAK&export=download',
+                'OUTPUT': os.path.expanduser(
+                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
+
             # Verificação de geometria GEOMETRY CHECK
             processing.runAndLoadResults("qgis:checkvalidity",
                                          {'INPUT_LAYER': os.path.expanduser(
@@ -282,18 +284,47 @@ class POLO:
                                              'VALID_OUTPUT': os.path.expanduser(
                                                  '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly.gpkg')})
 
-            # Downlaod_Estilo DOWNLOAD STYLE
-            processing.run("native:filedownloader", {
-                'URL': 'https://drive.google.com/u/0/uc?id=1_-Tde-pw-RYZkrO9xMf7sXuhlgDA2iAK&export=download',
-                'OUTPUT': os.path.expanduser(
-                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
-
             # Aplicar_Estilo APPLY STYLE
             processing.run("native:setlayerstyle",
                            {'INPUT': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly.gpkg'),
                                'STYLE': os.path.expanduser(
                                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/HidrografiaPoly_.qml')})
+
+
+            # Sedes municipais Amazon Cities
+
+            # mostrar mensagem SHOW MENSSEGER
+            self.iface.messageBar().pushMessage(
+                "POLO", "Acessando informações das sedes municipais",
+                level=Qgis.Info, duration=30)
+
+            # Donwload_KML_linhas DOWNLOAD KML_CITIES
+            processing.runAndLoadResults("native:filedownloader", {
+                'URL': 'https://drive.google.com/uc?id=1d6ah8AUZ_19Ze8BevZPxqD6vgOsPnL_w&export=download',
+                'OUTPUT': os.path.expanduser(
+                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM_.kml')})
+
+            # Downlaod_Estilo DOWNLOAD STYLE CITIES
+            processing.run("native:filedownloader", {
+                'URL': 'https://drive.google.com/uc?id=1ORCC2uAfQMV_dstf1WE3KyyK61CmCRuX&export=download',
+                'OUTPUT': os.path.expanduser(
+                    '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM_.qml')})
+
+            # Verificação de geometria GEOMETRY CITIES CHECK
+            processing.runAndLoadResults("qgis:checkvalidity",
+                                         {'INPUT_LAYER': os.path.expanduser(
+                                             '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM_.kml'),
+                                             'METHOD': 2, 'IGNORE_RING_SELF_INTERSECTION': False,
+                                             'VALID_OUTPUT': os.path.expanduser(
+                                                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM.gpkg')})
+
+            # Aplicar_Estilo APPLY CITIES STYLE
+            processing.run("native:setlayerstyle",
+                           {'INPUT': os.path.expanduser(
+                               '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM.gpkg'),
+                               'STYLE': os.path.expanduser(
+                                   '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Sedes_Municipais_AM_.qml')})
 
 
             # Vias de acesso ACCESS WAYS
@@ -483,7 +514,8 @@ class POLO:
                                              {'expression': '\"Região\"', 'length': 0, 'name': 'Região', 'precision': 0,
                                               'type': 10},
                                              {'expression': '\"acq_date\"', 'length': 0, 'name': 'DATA', 'precision': 0,
-                                              'type': 14}],
+                                              'type': 14},
+                                             {'expression': '"acq_date"+\'T\'||left("acq_time",2)||\':\'||right("acq_time",2)+\':00Z\'','length': 0,'name': 'DATATIME','precision': 0,'sub_type': 0,'type': 16,'type_name': 'datetime'}],
                                          'OUTPUT': os.path.expanduser(
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor.gpkg')})
 
@@ -649,8 +681,10 @@ class POLO:
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Áreas Prioritárias.gpkg'),
                            'STYLE': os.path.expanduser(
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Areasprioritarias.qml')})
+        """
 ########################################################################################################################
-        # Localizar situações
+
+        # Localizar situações FIND SITUANTIONS
 
         # mostrar mensagem SHOW MENSSAGER
         self.iface.messageBar().pushMessage(
@@ -676,6 +710,8 @@ class POLO:
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focosdecalor24h_.qml')})
 
+
+
         # Intersect focos INTERSECT HEAT POINTS
         processing.runAndLoadResults("native:intersection",
                        {'INPUT': os.path.expanduser(
@@ -694,12 +730,13 @@ class POLO:
                                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focosdecalor24h_.qml')})
 
         # >>>>>>Estraindo O DIA
+        
         processing.run("native:extractbyexpression", {
-            'INPUT': os.path.expanduser(
-                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor 24 horas.gpkg'),
-            'EXPRESSION': 'to_datetime(\"acq_date\"||\' \'||to_time(\"acq_time\",\'HHmm\'))>to_interval(\'24 hours\')',
-            'OUTPUT': os.path.expanduser(
-                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/situacao_data.gpkg')})
+        'INPUT': os.path.expanduser(
+        '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Focos de calor 24 horas.gpkg'),
+        'EXPRESSION': 'to_datetime(("acq_date" ||left("acq_time",2)||\':\'||right("acq_time",2)+\':00\'),\'yyyy-MM-ddhh:mm:ss\')>(now()-to_interval(\'6 hours\'))',
+        'OUTPUT': os.path.expanduser(
+        '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/situacao_data.gpkg')})
 
         #Kernel situações
         processing.run("qgis:heatmapkerneldensityestimation", {
@@ -709,7 +746,8 @@ class POLO:
             'OUTPUT_VALUE': 0, 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KERNEL_24h.tif')})
 
-        #Linhas do kernel 24h
+        #Linhas do kernel 6h
+
         processing.run("gdal:contour",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KERNEL_24h.tif'),
@@ -718,7 +756,8 @@ class POLO:
                            'NODATA': None, 'OFFSET': 0, 'EXTRA': '', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KernelLinhas24.gpkg')})
 
-        #Score Alto 24h HIGHT SCORE
+
+        #Score Alto 6hrs HIGHT SCORE
         processing.run("native:extractbyexpression",
                        {'INPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/KernelLinhas24.gpkg'),
@@ -791,11 +830,12 @@ class POLO:
                            'WEIGHT': '',
                            'CLASSFIELD': '', 'FIELD': 'NFocos', 'OUTPUT': os.path.expanduser(
                            '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Contagem_24.gpkg')})
-        # Score>10
+
+        # Score>5
         processing.run("native:extractbyexpression", {
             'INPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Contagem_24.gpkg'),
-            'EXPRESSION': ' \"NFocos\">=10', 'OUTPUT': os.path.expanduser(
+            'EXPRESSION': ' \"NFocos\">=5', 'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COREValido_24.gpkg')})
 
         # Areas Prioritarias PRIORITY AREAS
@@ -824,6 +864,7 @@ class POLO:
                                              '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Situações.gpkg')})
 
 #######################################################################################################################
+        """
         # DASHBOARD
         # Donwload_qml Dashboard DONWLOAD STYLE DASHBOARD
         processing.run("native:filedownloader", {
@@ -860,25 +901,212 @@ class POLO:
 
         # Donwload historico amazonas DONWLOAD AMAZON HISTORIC
         processing.runAndLoadResults("native:filedownloader", {
-            'URL': 'https://queimadas.dgi.inpe.br/queimadas/portal-static//estado/csv_estatisticas/historico_estado_amazonas.csv',
+            'URL': 'http://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/media/estado/csv_estatisticas/historico_estado_amazonas.csv',
             'OUTPUT': os.path.expanduser(
                 '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Historico Amazonas.csv')})
+
+        processing.run("native:refactorfields", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Historico Amazonas.csv'),
+            'FIELDS_MAPPING': [
+                {'expression': '"field_1"', 'length': 0, 'name': 'field_1', 'precision': 0, 'sub_type': 0, 'type': 10,
+                 'type_name': 'text'},
+                {'expression': 'replace("Janeiro",\'-\',\'0\')', 'length': 0, 'name': 'Janeiro', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Fevereiro",\'-\',\'0\')', 'length': 0, 'name': 'Fevereiro', 'precision': 0,
+                 'sub_type': 10,
+                 'type': 4, 'type_name': 'text'},
+                {'expression': 'replace("MarÃ§o",\'-\',\'0\')', 'length': 0, 'name': 'Março', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Abril",\'-\',\'0\')', 'length': 0, 'name': 'Abril', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Maio",\'-\',\'0\')', 'length': 0, 'name': 'Maio', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Junho",\'-\',\'0\')', 'length': 0, 'name': 'Junho', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Julho",\'-\',\'0\')', 'length': 0, 'name': 'Julho', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Agosto",\'-\',\'0\')', 'length': 0, 'name': 'Agosto', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Setembro",\'-\',\'0\')', 'length': 0, 'name': 'Setembro', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Outubro",\'-\',\'0\')', 'length': 0, 'name': 'Outubro', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Novembro",\'-\',\'0\')', 'length': 0, 'name': 'Novembro', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Dezembro",\'-\',\'0\')', 'length': 0, 'name': 'Dezembro', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': 'replace("Total",\'-\',\'0\')', 'length': 0, 'name': 'Total', 'precision': 0,
+                 'sub_type': 10, 'type': 4,
+                 'type_name': 'text'}]
+            ,
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Historico_Amazonas.csv')})
+
+        # Historico mês
+        processing.run("native:extractbyexpression",
+                        {'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Historico_Amazonas.csv'),
+            'EXPRESSION': 'to_real("field_1")>1',
+                         'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Select_Historico_AM.csv')})
+
+        processing.run("native:orderbyexpression", {
+            'INPUT':os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Select_Historico_AM.csv') ,
+            'EXPRESSION': "lpad(eval(title(format_date(now(),'MMMM'))),7,0)", 'ASCENDING': False, 'NULLS_FIRST': False, 'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/ORDEM_Historico_AM.csv')})
+
+
+        
+        #Historico anos
+        processing.run("native:orderbyexpression", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Select_Historico_AM.csv'),
+            'EXPRESSION':'lpad("Total",7,0)', 'ASCENDING': False, 'NULLS_FIRST': False,
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Ordem_anos_AM.gpkg')})
+
+
+
+
 
         # Abrir projeto do relatorio OPEN REPORT PROJECT
         project = QgsProject.instance()
         project.read(os.path.expanduser('~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/POLO.QGZ'))
         print(project.fileName())
 
+    
         # Exportar relatório EXPORT REPORT
         folder_path = self.dlg.localsave.filePath()
 
         DATANAME = datetime.now().strftime("%d_%m_%y")
         LOCAL = os.path.join(folder_path, 'Relatorio_' + DATANAME + '.pdf')
+        LOCALFILE = os.path.join(folder_path)
+
         processing.run("native:printlayouttopdf",
                        {'LAYOUT': 'Relatório Focos de Calor', 'LAYERS': None, 'DPI': None, 'FORCE_VECTOR': False,
                         'GEOREFERENCE': True, 'INCLUDE_METADATA': True, 'DISABLE_TILED': False, 'SIMPLIFY': True,
                         'TEXT_FORMAT': 0, 'SEPARATE_LAYERS': False,
                         'OUTPUT': LOCAL})
+
+        #Exportar areas prioritarias EXPORT PRIORITY AREAS
+
+        processing.run("native:atlaslayouttomultiplepdf",
+                       {'LAYOUT': 'Mapas das Áreas Prioritárias', 'COVERAGE_LAYER': None, 'FILTER_EXPRESSION': '',
+                        'SORTBY_EXPRESSION': '', 'SORTBY_REVERSE': False, 'LAYERS': None, 'DPI': None,
+                        'FORCE_VECTOR': False, 'FORCE_RASTER': False, 'GEOREFERENCE': True, 'INCLUDE_METADATA': True,
+                        'DISABLE_TILED': False, 'SIMPLIFY': True, 'TEXT_FORMAT': 0, 'IMAGE_COMPRESSION': 0,
+                        'OUTPUT_FILENAME': '"Area_n"||\'_\'||upper("NOME")||\'_\'||format_date(now(),\'dd_MM_yyyy\')\r\n',
+                        'OUTPUT_FOLDER': LOCALFILE})
+
+        # Exportar situação de uso do fogo EXPORT FIRE LOCATION
+
+        processing.run("native:atlaslayouttomultiplepdf",
+                       {'LAYOUT': 'Mapa de Situações de Uso do Fogo', 'COVERAGE_LAYER': None, 'FILTER_EXPRESSION': '',
+                        'SORTBY_EXPRESSION': '', 'SORTBY_REVERSE': False, 'LAYERS': None, 'DPI': None,
+                        'FORCE_VECTOR': False, 'FORCE_RASTER': False, 'GEOREFERENCE': True, 'INCLUDE_METADATA': True,
+                        'DISABLE_TILED': False, 'SIMPLIFY': True, 'TEXT_FORMAT': 0, 'IMAGE_COMPRESSION': 0,
+                        'OUTPUT_FILENAME': '"nome"||\'_situação n\'||right("area_n",2)',
+                        'OUTPUT_FOLDER': LOCALFILE})
+
+        #Colocação do Mês ao longo dos anos
+        processing.run("native:refactorfields", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Ordem_Historico_AM.csv'),
+            'FIELDS_MAPPING': [
+                {'expression': '"field_1"', 'length': 0, 'name': 'field_1', 'precision': 0, 'sub_type': 0, 'type': 10,
+                 'type_name': 'text'},
+                {'expression': '"Janeiro"', 'length': 0, 'name': 'Janeiro', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Fevereiro"', 'length': 0, 'name': 'Fevereiro', 'precision': 0, 'sub_type': 0,
+                 'type': 4, 'type_name': 'text'},
+                {'expression': '"MarÃƒÆ’Ã‚Â§o"', 'length': 0, 'name': 'Março', 'precision': 0, 'sub_type': 0,
+                 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Abril"', 'length': 0, 'name': 'Abril', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Maio"', 'length': 0, 'name': 'Maio', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Junho"', 'length': 0, 'name': 'Junho', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Julho"', 'length': 0, 'name': 'Julho', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Agosto"', 'length': 0, 'name': 'Agosto', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Setembro"', 'length': 0, 'name': 'Setembro', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Outubro"', 'length': 0, 'name': 'Outubro', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Novembro"', 'length': 0, 'name': 'Novembro', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Dezembro"', 'length': 0, 'name': 'Dezembro', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '"Total"', 'length': 0, 'name': 'Total', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '@row_number+1 ', 'length': 0, 'name': 'POS', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'int8'}],
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/POS_MES.gpkg')})
+
+        #Classificação do pior Mês
+        processing.run("native:refactorfields", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/Ordem_anos_AM.gpkg'),
+            'FIELDS_MAPPING': [
+                {'expression': '"field_1"', 'length': 0, 'name': 'field_1', 'precision': 0, 'sub_type': 0, 'type': 10,
+                 'type_name': 'text'},
+                {'expression': '"Total"', 'length': 0, 'name': 'Total', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '@row_number+1', 'length': 0, 'name': 'POS', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'int8'}],
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/POS_ANO.gpkg')})
+
+        #Valores dos meses corrrente
+        processing.run("native:refactorfields", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/POS_MES.gpkg'),
+            'FIELDS_MAPPING': [
+                {'expression': '"field_1"', 'length': 0, 'name': 'field_1', 'precision': 0, 'sub_type': 0, 'type': 10,
+                 'type_name': 'text'}, {
+                    'expression': 'lpad(with_variable(\'MES\',format_date(now(),\'MM\'),\r\nCase\r\n\twhen @MES = 1 then "Janeiro"\r\n\twhen @MES = 2 then "Janeiro"+"Fevereiro"\r\n\twhen @MES = 3 then "Janeiro"+"Fevereiro"+"Março"\r\n\twhen @MES = 4 then "Janeiro"+"Fevereiro"+"Março"+"Abril"\r\n\twhen @MES = 5 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"\r\n\twhen @MES = 6 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"\r\n\twhen @MES = 7 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"\r\n\twhen @MES = 8 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"+"Agosto"\r\n\twhen @MES = 9 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"+"Agosto"+"Setembro"\r\n\twhen @MES = 10 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"+"Agosto"+"Setembro"+"Outubro"\r\n\twhen @MES = 11 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"+"Agosto"+"Setembro"+"Outubro"+"Novembro"\r\n\twhen @MES = 12 then "Janeiro"+"Fevereiro"+"Março"+"Abril"+"Maio"+"Junho"+"Julho"+"Agosto"+"Setembro"+"Outubro"+"Novembro"+"Dezembro"\r\nelse \'ERRO\'\r\nend\r\n),5,0)',
+                    'length': 0, 'name': 'AC_ANO', 'precision': 0, 'sub_type': 0, 'type': 4, 'type_name': 'int8'}],
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COR_ANO.csv')})
+
+        #qualificação meses corrente
+        processing.run("native:orderbyexpression", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COR_ANO.csv'),
+            'EXPRESSION': 'lpad("AC_ANO",7,0)', 'ASCENDING': False, 'NULLS_FIRST': False,
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/QUALI_ANO.gpkg')})
+
+        # Classificação do pior Mês
+        processing.run("native:refactorfields", {
+            'INPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/QUALI_ANO.gpkg'),
+            'FIELDS_MAPPING': [
+                {'expression': '"field_1"', 'length': 0, 'name': 'field_1', 'precision': 0, 'sub_type': 0, 'type': 10,
+                 'type_name': 'text'},
+                {'expression': '"AC_ANO"', 'length': 0, 'name': 'Total', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'text'},
+                {'expression': '@row_number+1', 'length': 0, 'name': 'POS', 'precision': 0, 'sub_type': 0, 'type': 4,
+                 'type_name': 'int8'}],
+            'OUTPUT': os.path.expanduser(
+                '~/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/polo/Process/COR_ANO.gpkg')})
 
         # SHOW FINISH MENSSEGER
         self.iface.messageBar().pushMessage(

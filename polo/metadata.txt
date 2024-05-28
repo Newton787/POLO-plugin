@@ -6,7 +6,7 @@
 name=POLO
 qgisMinimumVersion=3.20.0
 description=Elabora automaticamente relátorios e mapas de focos de calor a partir do banco de dados FIRMS/NASA
-version=0.4
+version=0.7
 author=Newton Coelho Monteiro
 email=newtongel@gmail.com
 
