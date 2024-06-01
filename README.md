@@ -1,10 +1,10 @@
-POLO pling
-qgisMinimumVersion=3.20.0
-description: A tool that facilitates access to information about hotspots in the Amazon. It generates reports and maps of hotspots in real time and for the past 7 days. The plugin does this by accessing data from NASA and INPE.
-version: 0.7
-author: Newton Coelho Monteiro
-email: newtongel@gmail.com
-
+POLO plugin <br>
+qgisMinimumVersion=3.20.0 <br>
+description: A tool that facilitates access to information about hotspots in the Amazon. It generates reports and maps of hotspots in real time and for the past 7 days. The plugin does this by accessing data from NASA and INPE. <br>
+version: 0.7 <br>
+author: Newton Coelho Monteiro <br>
+email: newtongel@gmail.com <br>
+ <br> 
 The POLO plugin, inspired by the messenger of the god Tupã, facilitates access to information on heat spots in the state of Amazonas. 
 Integrated with QGIS, it automatically generates reports and maps using data from NASA's FIRMS and INPE. The plugin quantifies and 
 locates heat spots in real-time and the past seven days, identifying priority areas by municipality and mesoregion. Designed for ease 
