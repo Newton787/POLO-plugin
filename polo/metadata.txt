@@ -5,12 +5,12 @@
 [general]
 name=POLO
 qgisMinimumVersion=3.20.0
-description=Elabora automaticamente relátorios e mapas de focos de calor a partir do banco de dados FIRMS/NASA
+description= a tool that facilitates access to information about hotspots in the Amazon. It generates reports and maps of hotspots in real time and for the past 7 days. The plugin does this by accessing data from NASA and INPE.
 version=0.7
 author=Newton Coelho Monteiro
 email=newtongel@gmail.com
 
-about=POLO, mensageiro do deus Tupã, foi a inspiração para o nome deste plugin, que tem por objetivo facilitar o acesso às informações de queimadas no estado do Amazonas. Sem demandar conhecimentos em geoprocessamento, qualquer usuário será capaz de gerar, automaticamente, relatórios e mapas dos focos de calor que ocorrem no estado do Amazonas em tempo real, identificando áreas prioritárias e quantificando o número de focos de calor por município como também por mesorregião que ocorreram nos últimos 7 dias, a partir da data da busca. O plugin acessa a base de dados do FIRE INFORMATION FOR RESOURCE MANAGEMENT SYSTEM – FIRMS, da Agência Nacional Aeroespacial Americana – NASA e busca as informações do sensor MODIS (Espectrorradiômetro de Imagem de Resolução Moderada), a bordo dos satélites de referência TERRA e AQUA. Este plugin é fruto do trabalho do mestrando Newton Coelho Monteiro na disciplina Desenvolvimento de Aplicações Geoespaciais, do Programa de Pós Graduação em Ciências Geodésicas da Universidade Federal do Paraná, UFPR, sobre a orientação da Professora Dra Silvana Camboim.
+about=The POLO plugin, inspired by the messenger of the god Tupã, facilitates access to information on heat spots in the state of Amazonas. Integrated with QGIS, it automatically generates reports and maps using data from NASA's FIRMS and INPE. The plugin quantifies and locates heat spots in real-time and the past seven days, identifying priority areas by municipality and mesoregion. Designed for ease of use, it allows offline navigation with GeoPDFs on the Avenza Maps app for example.
 
 tracker=https://github.com/Newton787/POLO-plugin/issues
 repository=https://github.com/Newton787/POLO-plugin
@@ -23,7 +23,7 @@ hasProcessingProvider=no
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=python
+tags=python, Fire Monitoring, Heat Spor Detection, Real Time Data Collection, FIRMS, MODIS
 
 homepage=http://www.newtongeo.com.br
 category=Plugins
@@ -40,8 +40,7 @@ deprecated=False
 # plugin_dependencies=
 
 Category of the plugin: Raster, Vector, Database or Web
-# category=
+# category= Database, Web
 
 # If the plugin can run on QGIS Server.
 server=False
-
