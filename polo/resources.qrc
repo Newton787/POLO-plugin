@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/plugins/POLO" >
-        <file>icon.png</file>
-        <file>LOGO.png</file>
-        <file>BODY.png</file>
-    </qresource>
-</RCC>
