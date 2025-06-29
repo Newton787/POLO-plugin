@@ -1,7 +1,7 @@
 # POLO - Fire Hotspot Analysis Plugin for QGIS
 
 <p align="center">
-  <img src="icon.png" alt="POLO Plugin Icon" width="128" height="180">
+  <img src="icon.png" alt="POLO Plugin Icon" width="128" height="470">
 </p>
 
 ## Overview
