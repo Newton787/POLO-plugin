@@ -1,0 +1,35 @@
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=POLO
+qgisMinimumVersion=3.20.0
+description=Automatically generates reports and maps of fire hotspots using NASA FIRMS and INPE data for the Amazon region
+version=0.8
+author=Newton Coelho Monteiro
+email=newtongel@gmail.com
+license=MIT
+
+about=The POLO plugin, inspired by the messenger of the god Tupã, facilitates access to information on heat spots in the state of Amazonas. Integrated with QGIS, it automatically generates reports and maps using data from NASA's FIRMS and INPE. The plugin quantifies and locates heat spots in real-time and the past seven days, identifying priority areas by municipality and mesoregion. Designed for ease of use, it allows offline navigation with GeoPDFs on the Avenza Maps app for example.
+
+
+tracker=https://github.com/Newton787/POLO-plugin/issues
+repository=https://github.com/Newton787/POLO-plugin
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+changelog=0.8 - Fixed problems with OK button; added various near real-time satellite images for monitoring; added FIRMS fire hotspots for complementing AQUA-MT hotspots
+
+tags=fire,hotspots,FIRMS,NASA,INPE,Amazon,QGIS,report,mapping,kernel density,priority areas,geoprocessing,environment,monitoring 
+
+homepage=http://www.newtongeo.com.br
+category=Vector
+icon=icon.png
+experimental=True
+deprecated=False
+
+server=False
+
