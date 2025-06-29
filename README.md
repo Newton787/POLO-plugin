@@ -11,7 +11,7 @@ POLO is a QGIS plugin inspired by the messenger of the god Tupã, designed to fa
 ## 🎥 Demo Video
 
 [![POLO Plugin Demo](https://img.youtube.com/vi/MZx-r-2XwaI/maxresdefault.jpg)](https://www.youtube.com/watch?v=MZx-r-2XwaI)
-Add commentMore actions
+
 *Click the image above to watch the POLO plugin demonstration video*
 
 ## Key Features
