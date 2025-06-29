@@ -9,7 +9,11 @@
 POLO is a QGIS plugin inspired by the messenger of the god Tupã, designed to facilitate access to fire hotspot information in the Amazon region. The plugin automatically generates comprehensive reports and maps using real-time data from NASA's FIRMS (Fire Information for Resource Management System) and historical data from Brazil's INPE (National Institute for Space Research).
 
 ## 🎥 Demo Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MZx-r-2XwaI?si=qFJwqqDASqphgjg-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## 🎥 Demo Video
+
+[![POLO Plugin Demo](https://img.youtube.com/vi/MZx-r-2XwaI/maxresdefault.jpg)](https://www.youtube.com/watch?v=MZx-r-2XwaI)
+Add commentMore actions
+*Click the image above to watch the POLO plugin demonstration video*
 
 ## Key Features
 
