@@ -10,9 +10,9 @@ POLO is a QGIS plugin inspired by the messenger of the god Tupã, designed to fa
 
 ## 🎥 Demo Video
 
-[![POLO Plugin Demo](https://img.youtube.com/vi/MZx-r-2XwaI/maxresdefault.jpg)](https://www.youtube.com/watch?v=MZx-r-2XwaI)
+**[▶️ Watch POLO Plugin Demo on YouTube](https://www.youtube.com/watch?v=MZx-r-2XwaI)**
 
-*Click the image above to watch the POLO plugin demonstration video*
+> 📺 Click the link above to see the POLO plugin in action - demonstrating fire hotspot analysis, automated report generation, and mapping capabilities.
 
 ## Key Features
 
